@@ -1,9 +1,10 @@
 @padding: 5px;
-@border-colour: #999;
+@border-colour: #ccc;
 @background-colour: #fff;
 @border-style: 1px solid;
 @border-radius: 4px;
 @font-colour: #555;
+@height: 250px;
 
 .commonmark-editor {
 	border: @border-style @border-colour;
@@ -57,6 +58,7 @@
 
 		textarea {
 			margin-bottom: 5px;
+			height: @height;
 		}
 
 		&:after {
@@ -68,5 +70,8 @@
 
 	.preview {
 		padding: @padding;
+		height: @height;
+
+		overflow-y: scroll;
 	}
 }

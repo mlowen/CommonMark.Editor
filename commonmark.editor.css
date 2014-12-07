@@ -1,12 +1,12 @@
 .commonmark-editor {
-  border: 1px solid #999999;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   background-color: #ffffff;
 }
 .commonmark-editor .header {
   padding: 5px 5px 0;
   list-style-type: none;
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid #cccccc;
   background-color: #f0f0f0;
 }
 .commonmark-editor .header li {
@@ -18,14 +18,14 @@
   padding: 10px 15px;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
-  border-bottom-color: #999999;
+  border-bottom-color: #cccccc;
   margin-bottom: -1px;
 }
 .commonmark-editor .header li a.active {
   color: #555555;
   cursor: default;
   background-color: #ffffff;
-  border-color: #999999;
+  border-color: #cccccc;
   border-bottom-color: #ffffff;
 }
 .commonmark-editor .header li a.active:hover {
@@ -41,6 +41,7 @@
 }
 .commonmark-editor .editor textarea {
   margin-bottom: 5px;
+  height: 250px;
 }
 .commonmark-editor .editor:after {
   content: '';
@@ -49,4 +50,6 @@
 }
 .commonmark-editor .preview {
   padding: 5px;
+  height: 250px;
+  overflow-y: scroll;
 }

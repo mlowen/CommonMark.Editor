@@ -10,7 +10,7 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 			text: '', header: '',
 
 			// Events
-			save: null, change: null
+			change: null
 		});
 
 		this.each(function(index, item) {
@@ -18,11 +18,35 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 
 			// Header
 			var header = $('<ul class="header"></ul>')
-				.append('<li><a href="#">Edit</a></li>')
-				.append('<li><a href="#">Preview</a></li>');
+				.append(
+					$('<li></li>').append(
+						$('<a href="#" class="active">Edit</a>').click(function() {
+							header.find('li a.active').removeClass('active');
+							$(this).addClass('active');
+
+							preview.hide();
+							editor.show();
+
+							return false;
+						})
+					)
+				)
+				.append(
+					$('<li></li>').append(
+						$('<a href="#">Preview</a>').click(function() {
+							header.find('li a.active').removeClass('active');
+							$(this).addClass('active');
+
+							editor.hide();
+							preview.show();
+
+							return false;
+						})
+					)
+				);
 
 			// Preview
-			var preview = $('<div class="preview"></div>');
+			var preview = $('<div class="preview"></div>').hide();
 
 			// Editor
 			var onChange = function() {
@@ -40,14 +64,7 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 				.keydown(onChange)
 				.keyup(onChange);
 
-			var save = $('<button class="btn btn-success pull-right">Save</button>')
-				.click(function() {
-
-				});
-
-			var editor = $('<div class="editor"></div>')
-				.append(textarea)
-				.append(save);
+			var editor = $('<div class="editor"></div>').append(textarea);
 
 			$(item).addClass('commonmark-editor')
 				.append(header)
