@@ -15,6 +15,7 @@ requirejs.config({
 require(
 	[ 'jquery', 'commonmark.editor', 'bootstrap', 'domReady!' ],
 	function ($, cmEditor) {
-		var editor = $('#editor').commonMarkEditor({ header: false });
+		var editor = $('#default-editor').commonMarkEditor();
+		var editor = $('#headless-editor').commonMarkEditor({ header: false });
 	}
 );
