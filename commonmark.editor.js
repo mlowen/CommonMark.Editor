@@ -17,7 +17,8 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 			var editorText = '';
 
 			// Header
-			var header = $('<ul class="header"></ul>')
+			var header = $('<div class="header"></div>');
+			var tabs = $('<ul class="tabs"></ul>')
 				.append(
 					$('<li></li>').append(
 						$('<a href="#" class="active">Edit</a>').click(function() {
@@ -45,8 +46,10 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 					)
 				);
 
+			header.append(tabs);
+
 			// Preview
-			var preview = $('<div class="preview"></div>').hide();
+			var preview = $('<div class="editor-pane preview"></div>').hide();
 
 			// Editor
 			var onChange = function() {
@@ -64,7 +67,7 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 				.keydown(onChange)
 				.keyup(onChange);
 
-			var editor = $('<div class="editor"></div>').append(textarea);
+			var editor = $('<div class="editor-pane"></div>').append(textarea);
 
 			$(item).addClass('commonmark-editor')
 				.append(header)

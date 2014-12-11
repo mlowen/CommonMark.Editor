@@ -1,19 +1,22 @@
 .commonmark-editor {
-  border: 1px solid #cccccc;
-  border-radius: 4px;
   background-color: #ffffff;
 }
 .commonmark-editor .header {
   padding: 5px 5px 0;
-  list-style-type: none;
-  border-bottom: 1px solid #cccccc;
   background-color: #f0f0f0;
+  border: 1px solid #cccccc;
+  border-radius: 4px 4px 0 0;
 }
-.commonmark-editor .header li {
+.commonmark-editor .header .tabs {
+  padding: 0;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+.commonmark-editor .header .tabs li {
   display: inline-block;
   padding-right: 5px;
 }
-.commonmark-editor .header li a {
+.commonmark-editor .header .tabs li a {
   display: block;
   padding: 10px 15px;
   border: 1px solid transparent;
@@ -21,35 +24,33 @@
   border-bottom-color: #cccccc;
   margin-bottom: -1px;
 }
-.commonmark-editor .header li a.active {
+.commonmark-editor .header .tabs li a.active {
   color: #555555;
   cursor: default;
   background-color: #ffffff;
   border-color: #cccccc;
   border-bottom-color: #ffffff;
+  text-decoration: none;
 }
-.commonmark-editor .header li a.active:hover {
+.commonmark-editor .header .tabs li a.active:hover {
   font-color: #555555;
   background-color: #ffffff;
 }
-.commonmark-editor .header li a:hover {
+.commonmark-editor .header .tabs li a:hover {
   background-color: #e0e0e0;
   text-decoration: none;
 }
-.commonmark-editor .editor {
+.commonmark-editor .editor-pane {
   padding: 5px;
+  border: 1px solid #cccccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
 }
-.commonmark-editor .editor textarea {
-  margin-bottom: 5px;
+.commonmark-editor .editor-pane textarea {
   height: 250px;
+  max-width: 100%;
 }
-.commonmark-editor .editor:after {
-  content: '';
-  clear: both;
-  display: block;
-}
-.commonmark-editor .preview {
-  padding: 5px;
+.commonmark-editor .editor-pane.preview {
   height: 250px;
   overflow-y: scroll;
 }

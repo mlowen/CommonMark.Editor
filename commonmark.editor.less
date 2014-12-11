@@ -5,73 +5,77 @@
 @border-radius: 4px;
 @font-colour: #555;
 @height: 250px;
+@border: @border-style @border-colour;
 
 .commonmark-editor {
-	border: @border-style @border-colour;
-	border-radius: @border-radius;
+	// border: @border-style @border-colour;
+	// border-radius: @border-radius;
 	background-color: @background-colour;
 
 	.header {
 		padding: @padding @padding 0;
-		list-style-type: none;
-		border-bottom: @border-style @border-colour;
 		background-color: #f0f0f0;
 
-		li {
-			display: inline-block;
-			padding-right: @padding;
+		border: @border;
+		border-radius: @border-radius @border-radius 0 0;
 
-			a {
-				display: block;
-				padding: (@padding * 2) (@padding * 3);
+		.tabs {
+			padding: 0;
+			list-style-type: none;
+			margin-bottom: 0;
 
-				border: @border-style transparent;
-				border-radius: @border-radius @border-radius 0 0;
-				border-bottom-color: @border-colour;
+			li {
+				display: inline-block;
+				padding-right: @padding;
 
-				margin-bottom: -1px;
+				a {
+					display: block;
+					padding: (@padding * 2) (@padding * 3);
 
-				&.active {
-					color: @font-colour;
-					cursor: default;
-					background-color: @background-colour;
+					border: @border-style transparent;
+					border-radius: @border-radius @border-radius 0 0;
+					border-bottom-color: @border-colour;
 
-					border-color: @border-colour;
-					border-bottom-color: @background-colour;
+					margin-bottom: -1px;
+
+					&.active {
+						color: @font-colour;
+						cursor: default;
+						background-color: @background-colour;
+
+						border-color: @border-colour;
+						border-bottom-color: @background-colour;
+						text-decoration: none;
+
+						&:hover {
+							font-color: @font-colour;
+							background-color: @background-colour;
+						}
+					}
 
 					&:hover {
-						font-color: @font-colour;
-						background-color: @background-colour;
+						background-color: #e0e0e0;
+						text-decoration: none;
 					}
-				}
-
-				&:hover {
-					background-color: #e0e0e0;
-					text-decoration: none;
 				}
 			}
 		}
 	}
 
-	.editor {
+	.editor-pane {
 		padding: @padding;
+		border: @border;
+		border-top: none;
+		border-radius: 0 0 @border-radius @border-radius;
 
 		textarea {
-			margin-bottom: 5px;
 			height: @height;
+			max-width: 100%;
 		}
 
-		&:after {
-			content: '';
-			clear: both;
-			display: block;
+		&.preview {
+			height: @height;
+			overflow-y: scroll;
 		}
-	}
-
-	.preview {
-		padding: @padding;
-		height: @height;
-
-		overflow-y: scroll;
 	}
 }
