@@ -66,6 +66,19 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 		/* Public API */
 		self.element = element;
 
+		// Methods
+		self.text = function(value) {
+			if(typeof value === 'undefined')
+				return text;
+
+			if(text === value) return;
+
+			text = value;
+			textarea.val(text);
+		};
+
+		// Events
+
 		/* Constructor */
 		var header = new EditorHeader(options);
 		var textarea = $('<textarea class="form-control"></textarea>');
@@ -92,18 +105,12 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 			.append(header.element)
 			.append(editor)
 			.append(preview);
+
+		self.text(options.text);
 	}
 
 	$.fn.commonMarkEditor = function(options) {
-		options = $.extend({
-			// Initial values
-			text: '',
-
-			header: true,
-
-			// Events
-			change: null
-		}, options);
+		options = $.extend({ text: '', header: true }, options);
 
 		var editors = [];
 
