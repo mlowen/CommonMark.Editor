@@ -5,13 +5,15 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 	var convert = function (str) { return writer.render(reader.parse(str)); };
 
 	$.fn.commonMarkEditor = function(options) {
-		$.extend(options, {
+		options = $.extend({
 			// Initial values
-			text: '', header: '',
+			text: '', title: '',
+
+			header: true,
 
 			// Events
 			change: null
-		});
+		}, options);
 
 		this.each(function(index, item) {
 			var editorText = '';
@@ -45,6 +47,9 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 						})
 					)
 				);
+
+			if(!options.header)
+				header.addClass('transparent');
 
 			header.append(tabs);
 

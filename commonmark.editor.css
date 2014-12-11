@@ -7,6 +7,12 @@
   border: 1px solid #cccccc;
   border-radius: 4px 4px 0 0;
 }
+.commonmark-editor .header.transparent {
+  background-color: transparent;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
 .commonmark-editor .header .tabs {
   padding: 0;
   list-style-type: none;
