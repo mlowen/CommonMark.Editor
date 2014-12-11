@@ -4,7 +4,7 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 
 	var convert = function (str) { return writer.render(reader.parse(str)); };
 
-	var header = function(options) {
+	var EditorHeader = function(options) {
 		var self = this;
 		var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit' };
 
@@ -59,10 +59,45 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 		self.on.preview(click);
 	}
 
+	var Editor = function(element, options) {
+		var self = this;
+		var text = '';
+
+		/* Public API */
+		self.element = element;
+
+		/* Constructor */
+		var header = new EditorHeader(options);
+		var textarea = $('<textarea class="form-control"></textarea>');
+		var editor = $('<div class="editor-pane"></div>').append(textarea);
+		var preview = $('<div class="editor-pane preview"></div>').hide();
+
+		// Wire up some events
+		var onChange = function() {
+			var value = $(this).val();
+
+			if(value === text)
+				return;
+
+			text = value;
+			preview.html(convert(text));
+		};
+
+		header.on.edit(function() { preview.hide(); editor.show(); });
+		header.on.preview(function() { preview.show(); editor.hide(); });
+		textarea.change(onChange).keydown(onChange).keyup(onChange);
+
+		// Add all the elements
+		$(self.element).addClass('commonmark-editor')
+			.append(header.element)
+			.append(editor)
+			.append(preview);
+	}
+
 	$.fn.commonMarkEditor = function(options) {
 		options = $.extend({
 			// Initial values
-			text: '', title: '',
+			text: '',
 
 			header: true,
 
@@ -70,44 +105,10 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 			change: null
 		}, options);
 
-		this.each(function(index, item) {
-			var editorText = '';
+		var editors = [];
 
-			// Header
-			var head = new header(options);
+		this.each(function(index, item) { editors.push(new Editor(item, options)); });
 
-			// Preview
-			var preview = $('<div class="editor-pane preview"></div>').hide();
-
-			// Editor
-			var onChange = function() {
-				var newValue = $(this).val();
-
-				if(newValue === editorText)
-					return;
-
-				editorText = newValue;
-				preview.html(convert(editorText));
-			};
-
-			var textarea = $('<textarea class="form-control"></textarea>')
-				.change(onChange)
-				.keydown(onChange)
-				.keyup(onChange);
-
-			var editor = $('<div class="editor-pane"></div>').append(textarea);
-
-			// Tie into some events
-			head.on.edit(function() { preview.hide(); editor.show(); });
-			head.on.preview(function() { preview.show(); editor.hide(); });
-
-			// Add everything to the parent
-			$(item).addClass('commonmark-editor')
-				.append(head.element)
-				.append(editor)
-				.append(preview);
-		});
-
-		return this;
+		return editors;
 	};
 });
