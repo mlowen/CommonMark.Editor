@@ -63,8 +63,10 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 		var self = this;
 		var text = '';
 
+		var events = { change: 'cm-editor-changed' };
+
 		/* Public API */
-		self.element = element;
+		self.element = $(element);
 
 		// Methods
 		self.text = function(value) {
@@ -78,6 +80,9 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 		};
 
 		// Events
+
+		self.on { change: function(callback) { self.element.on(events.change, callback); } };
+		self.trigger { change: function(data) { self.element.trigger(new $.Event(events.change, { data: data })); }}
 
 		/* Constructor */
 		var header = new EditorHeader(options);
@@ -94,6 +99,8 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 
 			text = value;
 			preview.html(convert(text));
+
+			self.trigger.change({ text: text });
 		};
 
 		header.on.edit(function() { preview.hide(); editor.show(); });
@@ -101,7 +108,7 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 		textarea.change(onChange).keydown(onChange).keyup(onChange);
 
 		// Add all the elements
-		$(self.element).addClass('commonmark-editor')
+		self.element.addClass('commonmark-editor')
 			.append(header.element)
 			.append(editor)
 			.append(preview);
