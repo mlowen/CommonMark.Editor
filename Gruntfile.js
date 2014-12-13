@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				banner: banner,
 			},
 			build: {
-				src: '<%= pkg.name %>.js',
+				src: 'src/<%= pkg.name %>.js',
 				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.js'
 			}
 		},
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 					optimization: 2
 				},
 				files: {
-					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "commonmark.editor.less" // destination file and source file
+					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "src/<%= pkg.name %>.less" // destination file and source file
 				}
 			}
 		}
