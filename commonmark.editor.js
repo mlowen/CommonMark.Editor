@@ -81,8 +81,8 @@ define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmar
 
 		// Events
 
-		self.on { change: function(callback) { self.element.on(events.change, callback); } };
-		self.trigger { change: function(data) { self.element.trigger(new $.Event(events.change, { data: data })); }}
+		self.on = { change: function(callback) { self.element.on(events.change, callback); } };
+		self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, { data: data })); }}
 
 		/* Constructor */
 		var header = new EditorHeader(options);
