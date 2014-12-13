@@ -1,4 +1,4 @@
-define(['jquery', 'commonmark', 'css!commonmark.editor'], function ($, commonmark) {
+define([ 'jquery', 'commonmark' ], function ($, commonmark) {
 	var reader = commonmark.DocParser();
 	var writer = commonmark.HtmlRenderer();
 
