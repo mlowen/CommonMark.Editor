@@ -1,6 +1,9 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="dist/commonmark.editor-0.1.0.min.css" />
+
+		<title>CommonMark editor demo</title>
 	</head>
 	<body>
 		<div class="container">
@@ -15,6 +18,16 @@
 			<div id="headless-editor"></div>
 		</div>
 
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js" data-main="app.js"></script>
+		<script src="http://spec.commonmark.org/js/commonmark.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="dist/commonmark.editor-0.1.0.min.js"></script>
+
+		<script>
+			$(function() {
+				var editor = $('#default-editor').commonMarkEditor();
+				var editor = $('#headless-editor').commonMarkEditor({ header: false });
+			});
+		</script>
 	</body>
 </html>
