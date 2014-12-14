@@ -10,7 +10,7 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 
 ### Optional
 
-* [RequreJS](http://requirejs.org/)
+* [RequireJS](http://requirejs.org/)
 
 ## Building
 
@@ -56,7 +56,7 @@ CommonMark.Editor is a jQuery plugin, the most basic use case for it is as follo
 
 When creating an editor the method can take an object as a parameter to customise the editor, the available options are:
 
-* **text** *(default: empty string)* - This will set the initial test in the editor.
+* **text** *(default: empty string)* - This will set the initial text in the editor.
 * **header** *(default: true)* - When set to false the border around the top of the tabs and the tabs background is set to be transparent.
 
 ### Editor API
