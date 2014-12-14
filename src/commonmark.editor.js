@@ -120,11 +120,7 @@
 		$.fn.commonMarkEditor = function(options) {
 			options = $.extend({ text: '', header: true }, options);
 
-			var editors = [];
-
-			this.each(function(index, item) { editors.push(new Editor(item, options)); });
-
-			return editors;
+			return this.map(function(index, item) { return new Editor(item, options); });
 		};
 	};
 

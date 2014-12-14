@@ -66,7 +66,8 @@ The plugin method returns an array of editor objects one for each element return
 #### Methods
 
 * **text()** - Will return you the current text of the editor.
-* **text(*string*)** - Sets the current text of the editor. 
+* **text(*string*)** - Sets the current text of the editor.
+* **element** - The jQuery object which the plugin was called on.
 
 #### Events
 

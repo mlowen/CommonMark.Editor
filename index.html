@@ -26,7 +26,9 @@
 		<script>
 			$(function() {
 				var editor = $('#default-editor').commonMarkEditor();
-				var editor = $('#headless-editor').commonMarkEditor({ header: false });
+				var editorNoHead = $('#headless-editor').commonMarkEditor({ header: false });
+
+				console.log(editor);
 			});
 		</script>
 	</body>
