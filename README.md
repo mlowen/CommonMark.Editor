@@ -5,22 +5,33 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 ## Dependencies
 
 * [CommonMark](http://commonmark.org/)
-* [Bootstrap](http://getbootstrap.com/)
+* [Bootstrap](http://getbootstrap.com/) - only on the stylesheet.
 * [jQuery](http://jquery.com/)
 
 ### Optional
 
 * [RequreJS](http://requirejs.org/)
-* [RequireJS CSS plugin](https://github.com/guybedford/require-css)
+
+## Building
+
+CommonMark.Editor uses [Grunt](http://gruntjs.com/) to minimise the javascript and compile the [LESS](http://lesscss.org/) file. Once you have Grunt installed you only need to run `grunt` from the CommonMark.Editor directory to build, this will create a directory called `dist` in that folder which will contain the files.
 
 ## Usage
 
-CommonMark.Editor is a jQuery plugin that exposes itself as a AMD module. A very trimmed down example of how to use it is:
+CommonMark.Editor is a jQuery plugin, the most basic use case for it is as follows
 
 ```html
 <html>
 	<head>
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="dist/commonmark.editor-0.1.0.min.css" />
+
+		<script src="http://spec.commonmark.org/js/commonmark.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="dist/commonmark.editor-0.1.0.min.js"></script>
+
+		<title>CommonMark editor demo</title>
 	</head>
 	<body>
 		<div class="container">
@@ -28,12 +39,12 @@ CommonMark.Editor is a jQuery plugin that exposes itself as a AMD module. A very
 				<h1>CommonMark Editor</h1>
 			</div>
 
+			<h2>Default editor</h2>
 			<div id="editor"></div>
 		</div>
 
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js"></script>
 		<script>
-			require([ 'jquery', 'commonmark.editor' ], function ($) {
+			$(function() {
 				var editor = $('#editor').commonMarkEditor();
 			});
 		</script>
@@ -41,7 +52,67 @@ CommonMark.Editor is a jQuery plugin that exposes itself as a AMD module. A very
 </html>
 ```
 
-This example does leave some setup stuff as an exercise to the reader.
+### Options
+
+When creating an editor the method can take an object as a parameter to customise the editor, the available options are:
+
+* **text** *(default: empty string)* - This will set the initial test in the editor.
+* **header** *(default: true)* - When set to false the border around the top of the tabs and the tabs background is set to be transparent.
+
+### Editor API
+
+The plugin method returns an array of editor objects one for each element returned by the selector, this object allows you to programmatically interact with the editor.
+
+#### Methods
+
+* **text()** - Will return you the current text of the editor.
+* **text(*string*)** - Sets the current text of the editor. 
+
+#### Events
+
+All subscriptions to events occur through the `on` property of the editor.
+
+###### change
+
+This is fired whenever the text in the editor is changed.
+```js
+var editor = $('#editor').commonMarkEditor();
+editor[0].on.change(function(e) { 
+	console.log('new text: ' + e.text); 
+});
+```
+
+### Require.JS
+
+CommonMark.Editor will expose itself as an [AMD module](http://en.wikipedia.org/wiki/Asynchronous_module_definition) if it is possible, in such cases it will **not** load itself into the global scope so it does necessarily not play well in environments where there is a mixture of AMD modules and libraries loaded into the global scope.
+
+The easiest way to way to setup CommonMark.Editor to work in as an AMd module is to add it to your require config in a similar way to the following:
+
+```js
+requirejs.config({
+	'paths': {
+		'commonmark': 'http://spec.commonmark.org/js/commonmark',
+		'jquery': 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min',
+		'commonmark.editor': '<path to scripts>/commonmark.editor-<version>.min',
+	}
+});
+```
+
+Where it is important that jQuery and CommonMark are also available as AMD modules. If you also want load the CSS for CommonMark.Editor with require the recommended way of doing so is to shim in the dependency with the a [require css plugin](https://github.com/guybedford/require-css) as follows:
+
+```js
+requirejs.config({
+	'paths': {
+		'commonmark': 'http://spec.commonmark.org/js/commonmark',
+		'css': 'http://cdnjs.cloudflare.com/ajax/libs/require-css/0.1.5/css',
+		'jquery': 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min',
+		'commonmark.editor': '<path to scripts>/commonmark.editor-<version>.min',
+	},
+	'shim': {
+		'commonmark.editor': { deps: [ 'css!<path to styles>/commonmark.editor-<version>.min' ] }
+	},
+});
+```
 
 ### Issues
 
