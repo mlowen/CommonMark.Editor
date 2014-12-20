@@ -183,10 +183,19 @@
 			var content = new EditorContent();
 			var footer = options.save ? new EditorFooter() : null;
 
+			// Subscribe to events
+
 			header.on.edit(function() { content.state(content.states.edit); });
 			header.on.preview(function() { content.state(content.states.preview); });
 
-			content.on.change(function(data) { self.text(data.text); });
+			content.on.change(function(data) {
+				if(options.save) {
+					if(data.text === text) footer.disable();
+					else footer.enable();
+				} else {
+					self.text(data.text);
+				}
+			});
 
 			// Add all the elements
 			var body = $('<div class="cm-editor-body"></div>').append(content.element);
