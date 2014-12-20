@@ -10,7 +10,7 @@
 			var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit' };
 
 			/* Public API */
-			self.element = $('<div class="header"></div>');
+			self.element = $('<div class="cm-editor-header"></div>');
 
 			// Events
 			self.on = {
@@ -66,7 +66,7 @@
 			var events = { change: 'cm-editor-content-change' };
 
 			var textarea = $('<textarea class="form-control"></textarea>');
-			var preview = $('<div class="editor-pane preview"></div>');
+			var preview = $('<div class="preview"></div>');
 
 			/* Public API */
 			self.states = { edit: 1, preview: 2 }
@@ -144,8 +144,6 @@
 			var header = new EditorHeader(options);
 			var content = new EditorContent();
 
-
-
 			var save = null;
 			var revert = null;
 			var footer = null;
@@ -162,9 +160,11 @@
 			header.on.preview(function() { content.state(content.states.preview); });
 
 			// Add all the elements
+			var body = $('<div class="cm-editor-body"></div>').append(content.element);
+
 			self.element.addClass('commonmark-editor')
 				.append(header.element)
-				.append(content.element);
+				.append(body);
 
 			if(footer != null)
 				self.element.append(footer);

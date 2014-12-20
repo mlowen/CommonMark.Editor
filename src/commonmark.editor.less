@@ -12,7 +12,7 @@
 	// border-radius: @border-radius;
 	background-color: @background-colour;
 
-	.header {
+	.cm-editor-header {
 		padding: @padding @padding 0;
 		background-color: #f0f0f0;
 
@@ -26,7 +26,7 @@
 			border-right-color: transparent;
 		}
 
-		.tabs {
+		> .tabs {
 			padding: 0;
 			list-style-type: none;
 			margin-bottom: 0;
@@ -69,20 +69,24 @@
 		}
 	}
 
-	.editor-pane {
+	.cm-editor-body {
 		padding: @padding;
 		border: @border;
 		border-top: none;
 		border-radius: 0 0 @border-radius @border-radius;
 
-		textarea {
-			height: @height;
-			max-width: 100%;
-		}
+		.cm-editor-content {
+			> textarea {
+				height: @height;
+				max-width: 100%;
+			}
 
-		&.preview {
-			height: @height;
-			overflow-y: scroll;
+			> .preview {
+				height: @height;
+				overflow-y: scroll;
+				padding: @padding;
+				margin: -1 * @padding;
+			}
 		}
 	}
 }
