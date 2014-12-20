@@ -98,7 +98,7 @@
 			}
 
 			// Events
-			self.on = { change: function(callback) { element.on(events.change, callback); } };
+			self.on = { change: function(callback) { self.element.on(events.change, callback); } };
 			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); } };
 
 			// Construct
@@ -149,12 +149,13 @@
 
 				text = value;
 				content.text(text);
+				self.trigger.change({ text: text });
 			};
 
 			// Events
 
 			self.on = { change: function(callback) { self.element.on(events.change, callback); } };
-			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); }}
+			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); } };
 
 			/* Constructor */
 			var header = new EditorHeader(options);
@@ -163,6 +164,8 @@
 
 			header.on.edit(function() { content.state(content.states.edit); });
 			header.on.preview(function() { content.state(content.states.preview); });
+
+			content.on.change(function(data) { self.text(data.text); });
 
 			// Add all the elements
 			var body = $('<div class="cm-editor-body"></div>').append(content.element);

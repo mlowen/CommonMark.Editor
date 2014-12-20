@@ -31,6 +31,8 @@
 				var editor = $('#default-editor').commonMarkEditor();
 				var editorNoHead = $('#headless-editor').commonMarkEditor({ header: false });
 				var editorWithSave = $('#saveable-editor').commonMarkEditor({ save: true });
+
+				editor[0].on.change(function(data) { console.log(data.text); });
 			});
 		</script>
 	</body>
