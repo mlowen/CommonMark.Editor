@@ -148,6 +148,16 @@
 			};
 
 			/* Construct */
+			save.click(function(e) {
+				e.preventDefault();
+				self.trigger.save();
+			});
+
+			revert.click(function(e) {
+				e.preventDefault();
+				self.trigger.revert();
+			});
+
 			self.element.append(revert).append(save);
 			self.disable();
 		};
@@ -196,6 +206,11 @@
 					self.text(data.text);
 				}
 			});
+
+			if(options.save) {
+				footer.on.save(function() { self.text(content.text()); });
+				footer.on.revert(function() { content.text(self.text()); });
+			}
 
 			// Add all the elements
 			var body = $('<div class="cm-editor-body"></div>').append(content.element);
