@@ -115,6 +115,22 @@
 			self.state(self.states.edit);
 		}
 
+		var EditorFooter = function() {
+			var self = this;
+			var revert = $('<button class="btn btn-default">Revert</button>');
+			var save = $('<button class="btn btn-primary pull-right">Save</button>');
+
+			/* Public API */
+			self.element = $('<div class="cm-editor-footer"></div>');
+
+			// Methods
+
+			// Events
+
+			/* Construct */
+			self.element.append(revert).append(save);
+		};
+
 		var Editor = function(element, options) {
 			var self = this;
 			var text = '';
@@ -143,18 +159,7 @@
 			/* Constructor */
 			var header = new EditorHeader(options);
 			var content = new EditorContent();
-
-			var save = null;
-			var revert = null;
-			var footer = null;
-
-			if(options.save) {
-				footer = $('<div class="footer"></div>');
-				revert = $('<button class="btn btn-default">Revert</button>');
-				save = $('<button class="btn btn-primary pull-right">Save</button>');
-
-				footer.append(revert).append(save);
-			}
+			var footer = options.save ? new EditorFooter() : null;
 
 			header.on.edit(function() { content.state(content.states.edit); });
 			header.on.preview(function() { content.state(content.states.preview); });
@@ -162,12 +167,12 @@
 			// Add all the elements
 			var body = $('<div class="cm-editor-body"></div>').append(content.element);
 
+			if(footer != null)
+				body.append(footer.element);
+
 			self.element.addClass('commonmark-editor')
 				.append(header.element)
 				.append(body);
-
-			if(footer != null)
-				self.element.append(footer);
 
 			self.text(options.text);
 		}
