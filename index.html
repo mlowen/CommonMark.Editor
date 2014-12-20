@@ -16,6 +16,9 @@
 
 			<h2>Headless editor</h2>
 			<div id="headless-editor"></div>
+
+			<h2>Saveable editor</h2>
+			<div id="saveable-editor"></div>
 		</div>
 
 		<script src="http://spec.commonmark.org/js/commonmark.js"></script>
@@ -27,6 +30,7 @@
 			$(function() {
 				var editor = $('#default-editor').commonMarkEditor();
 				var editorNoHead = $('#headless-editor').commonMarkEditor({ header: false });
+				var saveable = $('#saveable-editor').commonMarkEditor({ save: true });
 
 				console.log(editor);
 			});

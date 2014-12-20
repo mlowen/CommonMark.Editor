@@ -48,77 +48,132 @@
 			if(!options.header)
 				self.element.addClass('transparent');
 
-				self.element.append(tabs);
+			self.element.append(tabs);
 
-				// Tie up internal events
-				var click = function(data) {
-					self.element.find('li a.active').removeClass('active');
-					$(data.element).addClass('active');
-				};
+			// Tie up internal events
+			var click = function(data) {
+				self.element.find('li a.active').removeClass('active');
+				$(data.element).addClass('active');
+			};
 
-				self.on.edit(click);
-				self.on.preview(click);
+			self.on.edit(click);
+			self.on.preview(click);
+		}
+
+		var EditorContent = function() {
+			var self = this;
+			var state = null;
+			var events = { change: 'cm-editor-content-change' };
+
+			var textarea = $('<textarea class="form-control"></textarea>');
+			var preview = $('<div class="editor-pane preview"></div>');
+
+			/* Public API */
+			self.states = { edit: 1, preview: 2 }
+			self.element = $('<div class="cm-editor-content"></div>')
+				.append(textarea)
+				.append(preview);
+
+			// Methods
+			self.state = function(s) {
+				if(typeof s === 'undefined') return state;
+				if(s == state) return;
+
+				state = s;
+
+				if(state == self.states.edit) {
+					textarea.show();
+					preview.hide();
+				} else {
+					textarea.hide();
+					preview.show();
+				}
+			};
+
+			self.text = function(text) {
+				if(typeof text === 'undefined') return textarea.val();
+
+				textarea.val(text);
+				textarea.change();
 			}
 
-			var Editor = function(element, options) {
-				var self = this;
-				var text = '';
+			// Events
+			self.on = { change: function(callback) { element.on(events.change, callback); } };
+			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); } };
 
-				var events = { change: 'cm-editor-changed' };
+			// Construct
 
-				/* Public API */
-				self.element = $(element);
+			var onChange = function() {
+				var text = textarea.val();
 
-				// Methods
-				self.text = function(value) {
-					if(typeof value === 'undefined')
-						return text;
-
-					if(text === value) return;
-
-					text = value;
-					textarea.val(text);
-				};
-
-				// Events
-
-				self.on = { change: function(callback) { self.element.on(events.change, callback); } };
-				self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); }}
-
-				/* Constructor */
-				var header = new EditorHeader(options);
-				var textarea = $('<textarea class="form-control"></textarea>');
-				var editor = $('<div class="editor-pane"></div>').append(textarea);
-				var preview = $('<div class="editor-pane preview"></div>').hide();
-
-				// Wire up some events
-				var onChange = function() {
-				var value = $(this).val();
-
-				if(value === text)
-					return;
-
-				text = value;
 				preview.html(convert(text));
-
 				self.trigger.change({ text: text });
 			};
 
-			header.on.edit(function() { preview.hide(); editor.show(); });
-			header.on.preview(function() { preview.show(); editor.hide(); });
 			textarea.change(onChange).keydown(onChange).keyup(onChange);
+
+			self.state(self.states.edit);
+		}
+
+		var Editor = function(element, options) {
+			var self = this;
+			var text = '';
+
+			var events = { change: 'cm-editor-changed' };
+
+			/* Public API */
+			self.element = $(element);
+
+			// Methods
+			self.text = function(value) {
+				if(typeof value === 'undefined')
+					return text;
+
+				if(text === value) return;
+
+				text = value;
+				content.text(text);
+			};
+
+			// Events
+
+			self.on = { change: function(callback) { self.element.on(events.change, callback); } };
+			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); }}
+
+			/* Constructor */
+			var header = new EditorHeader(options);
+			var content = new EditorContent();
+
+
+
+			var save = null;
+			var revert = null;
+			var footer = null;
+
+			if(options.save) {
+				footer = $('<div class="footer"></div>');
+				revert = $('<button class="btn btn-default">Revert</button>');
+				save = $('<button class="btn btn-primary pull-right">Save</button>');
+
+				footer.append(revert).append(save);
+			}
+
+			header.on.edit(function() { content.state(content.states.edit); });
+			header.on.preview(function() { content.state(content.states.preview); });
 
 			// Add all the elements
 			self.element.addClass('commonmark-editor')
 				.append(header.element)
-				.append(editor)
-				.append(preview);
+				.append(content.element);
+
+			if(footer != null)
+				self.element.append(footer);
 
 			self.text(options.text);
 		}
 
 		$.fn.commonMarkEditor = function(options) {
-			options = $.extend({ text: '', header: true }, options);
+			options = $.extend({ text: '', header: true, save: false }, options);
 
 			return this.map(function(index, item) { return new Editor(item, options); });
 		};
