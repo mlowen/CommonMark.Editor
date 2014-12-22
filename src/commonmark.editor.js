@@ -223,6 +223,10 @@
 
 				text = value;
 				content.text(text);
+
+				if(inlineContent)
+					inlineContent.html(convert(text));
+
 				self.trigger.change({ text: text });
 			};
 
@@ -235,6 +239,7 @@
 			var header = new EditorHeader(options);
 			var content = new EditorContent();
 			var footer = options.save ? new EditorFooter() : null;
+			var inlineContent = options.inline ? $('<div class="inline-content"></div>') : null;
 
 			// Subscribe to events
 
@@ -258,10 +263,12 @@
 			if(options.inline) {
 				content.hide();
 
-				if(options.save) { footer.hide(); }
+				if(options.save)
+					footer.hide();
 
 				header.on.toggle(function() {
 					content.toggle();
+					inlineContent.toggle();
 
 					if(options.save) { footer.hide(); }
 				});
@@ -270,8 +277,11 @@
 			// Add all the elements
 			var body = $('<div class="cm-editor-body"></div>').append(content.element);
 
-			if(footer != null)
+			if(footer)
 				body.append(footer.element);
+
+			if(inlineContent)
+				body.append(inlineContent);
 
 			self.element.addClass('commonmark-editor')
 				.append(header.element)
