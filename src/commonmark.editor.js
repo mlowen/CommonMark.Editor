@@ -7,7 +7,7 @@
 
 		var EditorHeader = function(options) {
 			var self = this;
-			var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit' };
+			var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit', toggle: 'cm-editor-header-toggle' };
 
 			/* Public API */
 			self.element = $('<div class="cm-editor-header"></div>');
@@ -15,12 +15,14 @@
 			// Events
 			self.on = {
 				preview: function(callback) { self.element.on(events.preview, callback); },
-				edit: function(callback) { self.element.on(events.edit, callback); }
+				edit: function(callback) { self.element.on(events.edit, callback); },
+				toggle: function(callback) { self.element.on(events.toggle, callback); }
 			};
 
 			self.trigger = {
 				preview: function(data) { self.element.trigger(new $.Event(events.preview, data)); },
-				edit: function(data) { self.element.trigger(new $.Event(events.edit, data)); }
+				edit: function(data) { self.element.trigger(new $.Event(events.edit, data)); },
+				toggle: function(data) { self.element.trigger(new $.Event(events.toggle)); }
 			};
 
 			/* Constructor */
@@ -65,6 +67,7 @@
 					if(title) title.toggle();
 
 					tabs.toggle();
+					self.trigger.toggle();
 				});
 
 				tabs.hide();
@@ -250,6 +253,18 @@
 			if(options.save) {
 				footer.on.save(function() { self.text(content.text()); });
 				footer.on.revert(function() { content.text(self.text()); });
+			}
+
+			if(options.inline) {
+				content.hide();
+
+				if(options.save) { footer.hide(); }
+
+				header.on.toggle(function() {
+					content.toggle();
+
+					if(options.save) { footer.hide(); }
+				});
 			}
 
 			// Add all the elements
