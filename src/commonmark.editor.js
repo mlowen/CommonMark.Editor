@@ -45,6 +45,12 @@
 					)
 				);
 
+			if(options.inline) {
+				var toggle = $('<button class="btn btn-link pull-right toggle"><span class="glyphicon glyphicon-pencil"></span></button>');
+
+				self.element.append(toggle);
+			}
+
 			if(!options.header)
 				self.element.addClass('transparent');
 
@@ -97,6 +103,10 @@
 				textarea.change();
 			}
 
+			self.show = function() { self.element.show(); };
+			self.hide = function() { self.element.hide(); };
+			self.toggle = function() { self.element.toggle(); };
+
 			// Events
 			self.on = { change: function(callback) { self.element.on(events.change, callback); } };
 			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); } };
@@ -135,6 +145,10 @@
 				save.prop(property, false);
 				revert.prop(property, false);
 			};
+
+			self.show = function() { self.element.show(); };
+			self.hide = function() { self.element.hide(); };
+			self.toggle = function() { self.element.toggle(); };
 
 			// Events
 			self.on = {
@@ -226,7 +240,7 @@
 		}
 
 		$.fn.commonMarkEditor = function(options) {
-			options = $.extend({ text: '', header: true, save: false }, options);
+			options = $.extend({ text: '', header: true, save: false, inline: false }, options);
 
 			return this.map(function(index, item) { return new Editor(item, options); });
 		};
