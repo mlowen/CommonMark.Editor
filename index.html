@@ -22,6 +22,12 @@
 
 			<h2>Inline editor</h2>
 			<div id="inline-editor"></div>
+
+			<h2>Inline editor with title</h2>
+			<div id="inline-titled-editor"></div>
+
+			<h2>Editor with all options enabled</h2>
+			<div id="everything-editor"></div>
 		</div>
 
 		<script src="http://spec.commonmark.org/js/commonmark.js"></script>
@@ -34,7 +40,9 @@
 				var editor = $('#default-editor').commonMarkEditor();
 				var editorNoHead = $('#headless-editor').commonMarkEditor({ header: false });
 				var editorWithSave = $('#saveable-editor').commonMarkEditor({ save: true });
-				var editorInline = $('#inline-editor').commonMarkEditor({ inline: true, title: 'Editor title' });
+				var editorInline = $('#inline-editor').commonMarkEditor({ inline: true });
+				var editorInlineWithTitle = $('#inline-titled-editor').commonMarkEditor({ inline: true, title: 'Editor title' });
+				var editorWithEverythingEnabled = $('#everything-editor').commonMarkEditor({ inline: true, title: 'Editor title', save: true, header: false });
 
 				editor[0].on.change(function(data) { console.log(data.text); });
 			});

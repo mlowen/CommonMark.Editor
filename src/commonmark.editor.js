@@ -270,7 +270,8 @@
 					content.toggle();
 					inlineContent.toggle();
 
-					if(options.save) { footer.hide(); }
+					if(options.save)
+						footer.toggle();
 				});
 			}
 
