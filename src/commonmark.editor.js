@@ -292,7 +292,7 @@
 		}
 
 		$.fn.commonMarkEditor = function(options) {
-			options = $.extend({ text: '', header: true, save: false, inline: false }, options);
+			options = $.extend({ text: '', header: true, save: false, inline: false, title: '' }, options);
 
 			return this.map(function(index, item) { return new Editor(item, options); });
 		};
