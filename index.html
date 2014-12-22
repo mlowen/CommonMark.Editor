@@ -34,7 +34,7 @@
 				var editor = $('#default-editor').commonMarkEditor();
 				var editorNoHead = $('#headless-editor').commonMarkEditor({ header: false });
 				var editorWithSave = $('#saveable-editor').commonMarkEditor({ save: true });
-				var editorInline = $('#inline-editor').commonMarkEditor({ inline: true });
+				var editorInline = $('#inline-editor').commonMarkEditor({ inline: true, title: 'Editor title' });
 
 				editor[0].on.change(function(data) { console.log(data.text); });
 			});

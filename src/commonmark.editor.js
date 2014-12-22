@@ -46,9 +46,35 @@
 				);
 
 			if(options.inline) {
-				var toggle = $('<button class="btn btn-link pull-right toggle"><span class="glyphicon glyphicon-pencil"></span></button>');
+				var edit = 'glyphicon-pencil';
+				var cancel = 'glyphicon-remove';
+
+				var glyph = $('<span class="glyphicon"></span>').addClass(edit);
+				var toggle = $('<a href="#" class="pull-right toggle"></a>').append(glyph);
+				var title = null;
+
+				toggle.click(function(e) {
+					e.preventDefault();
+
+					if(glyph.hasClass(edit)) {
+						glyph.removeClass(edit).addClass(cancel);
+					} else {
+						glyph.removeClass(cancel).addClass(edit);
+					}
+
+					if(title) title.toggle();
+
+					tabs.toggle();
+				});
+
+				tabs.hide();
 
 				self.element.append(toggle);
+
+				if(options.title) {
+					title = $('<strong class="title"></strong>').text(options.title);
+					self.element.append(title);
+				}
 			}
 
 			if(!options.header)
