@@ -4,13 +4,15 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
-			options: {
-				banner: banner,
-				sourceMap: true
-			},
-			build: {
-				src: 'src/<%= pkg.name %>.js',
-				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.js'
+			development: {
+				options: {
+					banner: banner,
+					sourceMap: true
+				},
+				files: {
+					'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'src/<%= pkg.name %>.js',
+					'dist/<%= pkg.name %>.knockout-<%= pkg.version %>.min.js': 'src/<%= pkg.name %>.knockout.js'
+				}
 			}
 		},
 		less: {
@@ -22,7 +24,7 @@ module.exports = function(grunt) {
 					optimization: 2
 				},
 				files: {
-					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "src/<%= pkg.name %>.less" // destination file and source file
+					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "src/<%= pkg.name %>.less"
 				}
 			}
 		}
