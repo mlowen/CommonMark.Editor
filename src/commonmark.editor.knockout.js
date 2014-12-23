@@ -1,6 +1,6 @@
 (function() {
 	var init = function($, ko) {
-
+		
 	};
 
 	if(typeof define === 'function' && define.amd)
