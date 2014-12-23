@@ -12,7 +12,10 @@
 		</div>
 
 		<h2>Default editor</h2>
-		<div data-bind="commonMarkEditor: plainText"></div>
+		<div data-bind="commonMarkEditor: simple"></div>
+
+		<h2>Observable editor</h2>
+		<div data-bind="commonMarkEditor: observable"></div>
 	</div>
 
 	<script src="http://spec.commonmark.org/js/commonmark.js"></script>
@@ -24,7 +27,10 @@
 
 	<script>
 		$(function() {
-			ko.applyBindings({ plainText: 'Foo bar' });
+			ko.applyBindings({
+				simple: 'Foo bar',
+				observable: ko.observable('Bar tar')
+			});
 		});
 	</script>
 </body>

@@ -5,7 +5,17 @@
 
 		ko.bindingHandlers.commonMarkEditor = {
 			init: function(element, accessor) {
-				var editor = $(element).commonMarkEditor({ text: accessor() })[0];
+				var editor = $(element).commonMarkEditor()[0];
+				var text = '';
+				var value = accessor();
+
+				if(typeof value === 'function') {
+					text = value();
+				} else {
+					text = value;
+				}
+
+				editor.text(text);
 			}
 		}
 	};
