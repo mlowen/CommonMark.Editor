@@ -119,6 +119,51 @@ requirejs.config({
 });
 ```
 
+### Knockout Bindings
+
+Bindings for [Knockout](http://knockoutjs.com/) are also provided for the editor via the `commonMarkEditor` binding. The simplest form of binding looks like.
+
+```html
+<html>
+	<head>
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<path to styles>/commonmark.editor-0.1.0.min.css" />
+
+		<script src="http://spec.commonmark.org/js/commonmark.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+		<script src="<path to scripts>/commonmark.editor-0.1.0.min.js"></script>
+		<script src="<path to scripts>/commonmark.editor.knockout-0.1.0.min.js"></script>
+
+		<title>CommonMark editor demo</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>CommonMark Editor Knockout Bindings</h1>
+			</div>
+
+			<div data-bind="commonMarkEditor: observable"></div>
+		</div>
+
+		<script>
+			$(function() {
+				ko.applyBindings({ observable: ko.observable('Sample content') });
+			});
+		</script>
+	</body>
+</html>
+```
+
+If you want to pass any options to the editor that is being created you can do so by passing an object to the binding.
+
+```html
+<div data-bind="commonMarkEditor: { value: observable, inline: true, title: 'Inline title' }">
+```
+
+All of the options with the exception of `text` are respected. Like the main library the knockout bindings will expose as an AMD module if possible.
+
 ### Issues
 
 If you find any issues while using CommonMark.Editor please feel free to report them at the [GitHub Repository](https://github.com/mlowen/CommonMark.Editor/issues).
