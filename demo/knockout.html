@@ -16,6 +16,9 @@
 
 		<h2>Observable editor</h2>
 		<div data-bind="commonMarkEditor: observable"></div>
+		
+		<h3>Raw</h3>
+		<textarea class="form-control" data-bind="value: observable, valueUpdate: 'afterkeyup'"></textarea>
 	</div>
 
 	<script src="http://spec.commonmark.org/js/commonmark.js"></script>

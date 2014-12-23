@@ -11,6 +11,9 @@
 
 				if(typeof value === 'function') {
 					text = value();
+
+					editor.on.change(function(e) { value(e.text); });
+					value.subscribe(function(update) { editor.text(update); });
 				} else {
 					text = value;
 				}
