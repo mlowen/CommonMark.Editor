@@ -16,9 +16,15 @@
 
 		<h2>Observable editor</h2>
 		<div data-bind="commonMarkEditor: observable"></div>
-		
+
 		<h3>Raw</h3>
 		<textarea class="form-control" data-bind="value: observable, valueUpdate: 'afterkeyup'"></textarea>
+
+		<h2>Observable editor with options</h2>
+		<div data-bind="commonMarkEditor: { value: secondary, inline: true, title: 'Knockout example' }"></div>
+
+		<h3>Raw</h3>
+		<textarea class="form-control" data-bind="value: secondary, valueUpdate: 'afterkeyup'"></textarea>
 	</div>
 
 	<script src="http://spec.commonmark.org/js/commonmark.js"></script>
@@ -32,7 +38,8 @@
 		$(function() {
 			ko.applyBindings({
 				simple: 'Foo bar',
-				observable: ko.observable('Bar tar')
+				observable: ko.observable('Bar tar'),
+				secondary: ko.observable('Bar tar')
 			});
 		});
 	</script>

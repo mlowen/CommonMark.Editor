@@ -5,9 +5,13 @@
 
 		ko.bindingHandlers.commonMarkEditor = {
 			init: function(element, accessor) {
-				var editor = $(element).commonMarkEditor()[0];
 				var text = '';
 				var value = accessor();
+				var isObject = typeof value === 'object';
+				var editor = $(element).commonMarkEditor(isObject ? value : null)[0];
+
+				if(isObject)
+					value = value.value;
 
 				if(typeof value === 'function') {
 					text = value();
