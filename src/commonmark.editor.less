@@ -1,4 +1,5 @@
 @padding: 5px;
+@padding-large: 15px;
 @border-colour: #ccc;
 @background-colour: #fff;
 @border-style: 1px solid;
@@ -9,10 +10,10 @@
 
 .commonmark-editor {
 	background-color: @background-colour;
-	margin: @padding 0;
+	margin: @padding-large 0;
 
 	.cm-editor-header {
-		padding: @padding @padding 0;
+		padding: @padding @padding-large 0;
 		background-color: #f0f0f0;
 		height: 48px;
 
@@ -69,8 +70,7 @@
 		}
 
 		> .toggle {
-			margin-top: 13px;
-			margin-right: 10px;
+			margin-top: 10px;
 			color: @border-colour;
 
 			&:hover {
@@ -81,15 +81,13 @@
 
 		> .title {
 			display: inline-block;
-			color: @font-colour;
-			margin-top: 10px;
-			font-size: 16px;
-			margin-left: 10px;
+			color: #333;
+			margin-top: 8px;
 		}
 	}
 
 	.cm-editor-body {
-		padding: @padding;
+		padding: @padding-large;
 		border: @border;
 		border-top: none;
 		border-radius: 0 0 @border-radius @border-radius;
@@ -103,8 +101,8 @@
 			> .preview {
 				height: @height;
 				overflow-y: scroll;
-				padding: @padding;
-				margin: -1 * @padding;
+				padding: @padding-large;
+				margin: -1 * @padding-large;
 			}
 		}
 
