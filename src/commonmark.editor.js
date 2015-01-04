@@ -48,31 +48,33 @@
 				);
 
 			if(options.inline) {
-				var edit = 'glyphicon-pencil';
-				var cancel = 'glyphicon-remove';
-
-				var glyph = $('<span class="glyphicon"></span>').addClass(edit);
-				var toggle = $('<a href="#" class="pull-right toggle"></a>').append(glyph);
 				var title = null;
 
-				toggle.click(function(e) {
-					e.preventDefault();
+				if(options.toggle) {
+					var edit = 'glyphicon-pencil';
+					var cancel = 'glyphicon-remove';
 
-					if(glyph.hasClass(edit)) {
-						glyph.removeClass(edit).addClass(cancel);
-					} else {
-						glyph.removeClass(cancel).addClass(edit);
-					}
+					var glyph = $('<span class="glyphicon"></span>').addClass(edit);
+					var toggle = $('<a href="#" class="pull-right toggle"></a>').append(glyph);
 
-					if(title) title.toggle();
+					toggle.click(function(e) {
+						e.preventDefault();
+							if(glyph.hasClass(edit)) {
+								glyph.removeClass(edit).addClass(cancel);
+							} else {
+								glyph.removeClass(cancel).addClass(edit);
+							}
 
-					tabs.toggle();
-					self.trigger.toggle();
-				});
+						if(title) title.toggle();
+
+						tabs.toggle();
+						self.trigger.toggle();
+					});
+
+					self.element.append(toggle);
+				}
 
 				tabs.hide();
-
-				self.element.append(toggle);
 
 				if(options.title) {
 					title = $('<strong class="title"></strong>').text(options.title);
@@ -292,7 +294,7 @@
 		}
 
 		$.fn.commonMarkEditor = function(options) {
-			options = $.extend({ text: '', header: true, save: false, inline: false, title: '' }, options);
+			options = $.extend({ text: '', header: true, save: false, inline: false, title: '', toggle: true }, options);
 
 			return this.map(function(index, item) { return new Editor(item, options); });
 		};
