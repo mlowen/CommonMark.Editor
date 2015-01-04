@@ -27,12 +27,23 @@ module.exports = function(grunt) {
 					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "src/<%= pkg.name %>.less"
 				}
 			}
+		},
+		watch: {
+			scripts: {
+				files: 'src/**/*.js',
+				tasks: [ 'uglify' ]
+			},
+			css: {
+				files: 'src/**/*.less',
+				tasks: [ 'less' ]
+			}
 		}
 	});
 
 	/* Plugins */
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	/* Tasks */
 	grunt.registerTask('default', [ 'uglify', 'less' ]);
