@@ -61,6 +61,7 @@ When creating an editor the method can take an object as a parameter to customis
 * **save** *(default: false)* - When set to true the editor will now display a save and revert changes button below the text area and preview. The editor will only update the value returned by the `text()` method and trigger a change event when the save button is clicked. Revert will take remove any pending changes and reset what is currently being edited to the value of the `text()` method.
 * **inline** *(default: false)* - When set to true it will display the html content of the editor in a non-editable state, the tabs will be hidden, the header will contain a button which when clicked will enable the editing of the content.
 * **title** *(default: empty string)* - This will set the text in the header of the editor when `inline` is enabled and the tabs are not visible.
+* **toggle** *(default: true)* - This flag denotes if a toggle is displayed in the upper right corner when `inline` is enabled, if this flag is specified when `inline` is false it will be ignored.
 
 ### Editor API
 
@@ -68,9 +69,11 @@ The plugin method returns an array of editor objects one for each element return
 
 #### Methods
 
+* **element** - The jQuery object which the plugin was called on.
+* **inline()** - Will return a boolean, `true` if the editor is in "inline" mode and `false` if in "edit" mode. If `inline` was not enabled via the options when creating the editor it will always return `false`.
+* **inline(*boolean*)** - Will set if the editor is in "inline" or "edit" mode, this method will only work when the `inline` flag is set to true when creating the editor, otherwise it does nothing.
 * **text()** - Will return you the current text of the editor.
 * **text(*string*)** - Sets the current text of the editor.
-* **element** - The jQuery object which the plugin was called on.
 
 #### Events
 
