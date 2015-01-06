@@ -25,6 +25,20 @@
 				toggle: function(data) { self.element.trigger(new $.Event(events.toggle)); }
 			};
 
+			self.toggle = function() {
+				if(options.toggle) {
+					if(glyph.hasClass(edit)) {
+						glyph.removeClass(edit).addClass(cancel);
+					} else {
+						glyph.removeClass(cancel).addClass(edit);
+					}
+				}
+
+				if(title) title.toggle();
+
+				tabs.toggle();
+			};
+
 			/* Constructor */
 
 			var tabs = $('<ul class="tabs"></ul>')
@@ -59,15 +73,6 @@
 
 					toggle.click(function(e) {
 						e.preventDefault();
-							if(glyph.hasClass(edit)) {
-								glyph.removeClass(edit).addClass(cancel);
-							} else {
-								glyph.removeClass(cancel).addClass(edit);
-							}
-
-						if(title) title.toggle();
-
-						tabs.toggle();
 						self.trigger.toggle();
 					});
 
@@ -213,6 +218,16 @@
 
 			var events = { change: 'cm-editor-changed' };
 
+			/* Utility functions */
+			var toggleInline = function() {
+				content.toggle();
+				inlineContent.toggle();
+				header.toggle();
+
+				if(options.save)
+					footer.toggle();
+			};
+
 			/* Public API */
 			self.element = $(element);
 
@@ -230,6 +245,19 @@
 					inlineContent.html(convert(text));
 
 				self.trigger.change({ text: text });
+			};
+
+			self.inline = function(value) {
+				if(!options.inline)
+					return false;
+
+				var isInline = inlineContent.is(':visible');
+
+				if(typeof value === 'undefined')
+					return isInline;
+
+				if(isInline != value)
+					toggleInline();
 			};
 
 			// Events
@@ -268,13 +296,7 @@
 				if(options.save)
 					footer.hide();
 
-				header.on.toggle(function() {
-					content.toggle();
-					inlineContent.toggle();
-
-					if(options.save)
-						footer.toggle();
-				});
+				header.on.toggle(toggleInline);
 			}
 
 			// Add all the elements

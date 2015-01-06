@@ -26,6 +26,7 @@
 			<h2>Inline editor with title</h2>
 			<div id="inline-titled-editor"></div>
 
+			<button id="toggler" class="btn btn-default pull-right">Toggle Inline</button>
 			<h2>Inline editor with no toggle</h2>
 			<div id="inline-toggless-editor"></div>
 
@@ -49,6 +50,14 @@
 				var editorWithEverythingEnabled = $('#everything-editor').commonMarkEditor({ inline: true, title: 'Editor title', save: true, header: false });
 
 				editor[0].on.change(function(data) { console.log(data.text); });
+
+				$('#toggler').click(function(e) {
+					e.preventDefault();
+
+					var edit = editorInlineWithNoToggle[0];
+
+					edit.inline(!edit.inline());
+				});
 			});
 		</script>
 	</body>
