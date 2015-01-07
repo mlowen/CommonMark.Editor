@@ -7,11 +7,20 @@
 			init: function(element, accessor) {
 				var text = '';
 				var value = accessor();
-				var isObject = typeof value === 'object';
-				var editor = $(element).commonMarkEditor(isObject ? value : null)[0];
+				var options = typeof value === 'object' ? value : null;
+				var inlineObservable = null;
 
-				if(isObject)
+				if(options) {
 					value = value.value;
+
+					if(typeof options.inline === 'function')
+					{
+						inlineObservable = options.inline;
+						options.inline = true;
+					}
+				}
+
+				var editor = $(element).commonMarkEditor(options)[0];
 
 				if(typeof value === 'function') {
 					text = value();
@@ -20,6 +29,14 @@
 					value.subscribe(function(update) { editor.text(update); });
 				} else {
 					text = value;
+				}
+
+				if(inlineObservable) {
+					editor.inline(inlineObservable());
+
+					inlineObservable.subscribe(function(value) {
+						editor.inline(value);
+					});
 				}
 
 				editor.text(text);

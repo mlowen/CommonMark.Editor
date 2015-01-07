@@ -25,6 +25,13 @@
 
 		<h3>Raw</h3>
 		<textarea class="form-control" data-bind="value: secondary, valueUpdate: 'afterkeyup'"></textarea>
+
+		<h2>Observable editor with options and inline observable</h2>
+		<div data-bind="commonMarkEditor: { value: tertiary, inline: isInline, toggle: false, title: 'Knockout example' }"></div>
+
+		<button class="btn btn-default pull-right" data-bind="click: toggleInline">Toggle Inline</button>
+		<h3>Raw</h3>
+		<textarea class="form-control" data-bind="value: tertiary, valueUpdate: 'afterkeyup'"></textarea>
 	</div>
 
 	<script src="http://spec.commonmark.org/js/commonmark.js"></script>
@@ -39,7 +46,10 @@
 			ko.applyBindings({
 				simple: 'Foo bar',
 				observable: ko.observable('Bar tar'),
-				secondary: ko.observable('Bar tar')
+				secondary: ko.observable('Bar tar'),
+				tertiary: ko.observable('Foo bar'),
+				isInline: ko.observable(true),
+				toggleInline: function() { this.isInline(!this.isInline()); }
 			});
 		});
 	</script>
