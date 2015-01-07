@@ -14,7 +14,7 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 
 ## Building
 
-CommonMark.Editor uses [Grunt](http://gruntjs.com/) to minimise the javascript and compile the [LESS](http://lesscss.org/) file. Once you have Grunt installed you only need to run `grunt` from the CommonMark.Editor directory to build, this will create a directory called `dist` in that folder which will contain the files.
+CommonMark.Editor uses [Grunt](http://gruntjs.com/) to minimise the javascript and compile the [LESS](http://lesscss.org/) file. Once you have Grunt installed you only need to run `grunt` from the CommonMark.Editor directory to build, this will create a directory called `dist` which will contain the files.
 
 ## Usage
 
@@ -165,7 +165,9 @@ If you want to pass any options to the editor that is being created you can do s
 <div data-bind="commonMarkEditor: { value: observable, inline: true, title: 'Inline title' }">
 ```
 
-All of the options with the exception of `text` are respected. Like the main library the knockout bindings will expose as an AMD module if possible.
+All of the options with the exception of `text` are respected. The `inline` option can be assigned to an observable like the `value` option, doing so will allow to control if the editor is in 'inline' mode as if thh `inline(boolean)` method had been called.
+
+Like the main library the knockout bindings will expose as an AMD module if possible.
 
 ### Issues
 
