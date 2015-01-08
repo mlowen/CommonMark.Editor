@@ -94,7 +94,7 @@ editor[0].on.change(function(e) {
 
 CommonMark.Editor will expose itself as an [AMD module](http://en.wikipedia.org/wiki/Asynchronous_module_definition) if it is possible, in such cases it will **not** load itself into the global scope so it does necessarily not play well in environments where there is a mixture of AMD modules and libraries loaded into the global scope.
 
-The easiest way to way to setup CommonMark.Editor to work in as an AMd module is to add it to your require config in a similar way to the following:
+The easiest way to way to setup CommonMark.Editor to work in as an AMD module is to add it to your require config in a similar way to the following:
 
 ```js
 requirejs.config({
@@ -165,7 +165,7 @@ If you want to pass any options to the editor that is being created you can do s
 <div data-bind="commonMarkEditor: { value: observable, inline: true, title: 'Inline title' }">
 ```
 
-All of the options with the exception of `text` are respected. The `inline` option can be assigned to an observable like the `value` option, doing so will allow to control if the editor is in 'inline' mode as if thh `inline(boolean)` method had been called.
+All of the options with the exception of `text` are respected. The `inline` option can be assigned to an observable like the `value` option, doing so will allow to control if the editor is in 'inline' mode as if the `inline(boolean)` method had been called.
 
 Like the main library the knockout bindings will expose as an AMD module if possible.
 
