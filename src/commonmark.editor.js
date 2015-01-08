@@ -102,13 +102,16 @@
 			self.on.preview(click);
 		}
 
-		var EditorContent = function() {
+		var EditorContent = function(options) {
 			var self = this;
 			var state = null;
 			var events = { change: 'cm-editor-content-change' };
 
 			var textarea = $('<textarea class="form-control"></textarea>');
 			var preview = $('<div class="preview"></div>');
+
+			if(options.name)
+				textarea.attr('name', options.name);
 
 			/* Public API */
 			self.states = { edit: 1, preview: 2 }
@@ -271,7 +274,7 @@
 
 			/* Constructor */
 			var header = new EditorHeader(options);
-			var content = new EditorContent();
+			var content = new EditorContent(options);
 			var footer = options.save ? new EditorFooter() : null;
 			var inlineContent = options.inline ? $('<div class="inline-content"></div>') : null;
 
@@ -320,7 +323,15 @@
 		}
 
 		$.fn.commonMarkEditor = function(options) {
-			options = $.extend({ text: '', header: true, save: false, inline: false, title: '', toggle: true }, options);
+			options = $.extend({
+				header: true,
+				inline: false,
+				name: null,
+				save: false,
+				text: '',
+				title: '',
+				toggle: true
+			}, options);
 
 			return this.map(function(index, item) { return new Editor(item, options); });
 		};

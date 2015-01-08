@@ -56,10 +56,11 @@ CommonMark.Editor is a jQuery plugin, the most basic use case for it is as follo
 
 When creating an editor the method can take an object as a parameter to customise the editor, the available options are:
 
-* **text** *(default: empty string)* - This will set the initial text in the editor.
 * **header** *(default: true)* - When set to false the border around the top of the tabs and the tabs background is set to be transparent.
-* **save** *(default: false)* - When set to true the editor will now display a save and revert changes button below the text area and preview. The editor will only update the value returned by the `text()` method and trigger a change event when the save button is clicked. Revert will take remove any pending changes and reset what is currently being edited to the value of the `text()` method.
 * **inline** *(default: false)* - When set to true it will display the html content of the editor in a non-editable state, the tabs will be hidden, the header will contain a button which when clicked will enable the editing of the content.
+* **name** *(default: null)* - When set to a non-null value this will set the name of the text area in the editor so it can be used as part of a form.
+* **save** *(default: false)* - When set to true the editor will now display a save and revert changes button below the text area and preview. The editor will only update the value returned by the `text()` method and trigger a change event when the save button is clicked. Revert will take remove any pending changes and reset what is currently being edited to the value of the `text()` method.
+* **text** *(default: empty string)* - This will set the initial text in the editor.
 * **title** *(default: empty string)* - This will set the text in the header of the editor when `inline` is enabled and the tabs are not visible.
 * **toggle** *(default: true)* - This flag denotes if a toggle is displayed in the upper right corner when `inline` is enabled, if this flag is specified when `inline` is false it will be ignored.
 

@@ -49,7 +49,7 @@
 				var editorInline = $('#inline-editor').commonMarkEditor({ inline: true });
 				var editorInlineWithTitle = $('#inline-titled-editor').commonMarkEditor({ inline: true, title: 'Editor title' });
 				var editorInlineWithNoToggle = $('#inline-toggless-editor').commonMarkEditor({ inline: true, toggle: false });
-				var editorWithEverythingEnabled = $('#everything-editor').commonMarkEditor({ inline: true, title: 'Editor title', save: true, header: false });
+				var editorWithEverythingEnabled = $('#everything-editor').commonMarkEditor({ name: 'commonmark-editor', inline: true, title: 'Editor title', save: true, header: false });
 
 				editor[0].on.change(function(data) { console.log(data.text); });
 
