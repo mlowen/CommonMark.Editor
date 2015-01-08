@@ -91,6 +91,17 @@ editor[0].on.change(function(e) {
 });
 ```
 
+###### inlineToggle
+
+This is only fired when the `inline` option is set to true and the user has toggled between "inline" and "edit" modes.
+
+```js
+var editor = $('#editor').commonMarkEditor();
+editor[0].on.inlineToggle(function() {
+	console.log('Inline has been toggled.');
+});
+```
+
 ### Require.JS
 
 CommonMark.Editor will expose itself as an [AMD module](http://en.wikipedia.org/wiki/Asynchronous_module_definition) if it is possible, in such cases it will **not** load itself into the global scope so it does necessarily not play well in environments where there is a mixture of AMD modules and libraries loaded into the global scope.

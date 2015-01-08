@@ -223,7 +223,7 @@
 			var self = this;
 			var text = '';
 
-			var events = { change: 'cm-editor-changed' };
+			var events = { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' };
 
 			/* Utility functions */
 			var toggleInline = function() {
@@ -233,6 +233,8 @@
 
 				if(options.save)
 					footer.toggle();
+
+				self.trigger.inlineToggle();
 			};
 
 			/* Public API */
@@ -269,8 +271,15 @@
 
 			// Events
 
-			self.on = { change: function(callback) { self.element.on(events.change, callback); } };
-			self.trigger = { change: function(data) { self.element.trigger(new $.Event(events.change, data)); } };
+			self.on = {
+				change: function(callback) { self.element.on(events.change, callback); },
+				inlineToggle: function(callback) { self.element.on(events.inlineToggle, callback); }
+			};
+
+			self.trigger = {
+				change: function(data) { self.element.trigger(new $.Event(events.change, data)); },
+				inlineToggle: function() { self.element.trigger(new $.Event(events.inlineToggle)); }
+			};
 
 			/* Constructor */
 			var header = new EditorHeader(options);

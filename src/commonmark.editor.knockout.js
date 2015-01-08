@@ -37,6 +37,13 @@
 					inlineObservable.subscribe(function(value) {
 						editor.inline(value);
 					});
+
+					editor.on.inlineToggle(function() {
+						var inline = editor.inline();
+
+						if(inline != inlineObservable())
+							inlineObservable(inline);
+					});
 				}
 
 				editor.text(text);
