@@ -135,6 +135,10 @@
 			self.text = function(text) {
 				if(typeof text === 'undefined') return textarea.val();
 
+				// Lets not cause unnecessary resetting of text and fire unneeded events.
+				if(textarea.val() === text)
+					return;
+
 				textarea.val(text);
 				textarea.change();
 			}
