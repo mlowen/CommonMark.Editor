@@ -37,6 +37,20 @@ module.exports = function(grunt) {
 				files: 'src/**/*.less',
 				tasks: [ 'less' ]
 			}
+		},
+		compress: {
+			main: {
+				options: { archive: '<%= pkg.name %>-<%= pkg.version %>.zip' },
+				files: [
+					{ src: [ 'LICENSE', 'README.md' ] },
+					{
+						cwd: 'dist/',
+						src: [ '*-<%= pkg.version %>.*' ],
+						dest: 'commonmark.editor/',
+						expand: true,
+					}
+				]
+			}
 		}
 	});
 
@@ -44,7 +58,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	/* Tasks */
 	grunt.registerTask('default', [ 'uglify', 'less' ]);
+	grunt.registerTask('package', [ 'uglify', 'less', 'compress' ]);
 };
