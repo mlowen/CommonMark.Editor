@@ -4,9 +4,11 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 
 ## Dependencies
 
-* [CommonMark](http://commonmark.org/) [>= 0.17](https://github.com/jgm/CommonMark/releases)
-* [Bootstrap](http://getbootstrap.com/) - only on the stylesheet.
-* [jQuery](http://jquery.com/)
+* [CommonMark](http://commonmark.org/) tested against [0.17](https://github.com/jgm/CommonMark/releases)
+* [Bootstrap](http://getbootstrap.com/) tested against [3.3.2](https://github.com/twbs/bootstrap/releases/tag/v3.3.2) - only dependent on the stylesheet.
+* [jQuery](http://jquery.com/) tested against [2.1.3](https://github.com/jquery/jquery/releases/tag/2.1.3)
+
+CommonMark.Editor should work against other versions of these libraries but has only been tested against the ones noted above.
 
 ### Optional
 
