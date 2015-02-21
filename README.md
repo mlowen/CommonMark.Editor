@@ -4,7 +4,7 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 
 ## Dependencies
 
-* [CommonMark](http://commonmark.org/)
+* [CommonMark](http://commonmark.org/) [>= 0.17](https://github.com/jgm/CommonMark/releases)
 * [Bootstrap](http://getbootstrap.com/) - only on the stylesheet.
 * [jQuery](http://jquery.com/)
 
