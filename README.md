@@ -1,6 +1,6 @@
-# CommonMark.Editor
+# Bootstrap Commonmark Editor
 
-CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark.org/) loosely inspired by the markdown editor available at [GitHub](https://github.com/).
+The Bootstrap CommonMark Editor is a basic web based CommonMark editor for bootstrap loosely inspired by the markdown editor available at GitHub.
 
 ## Dependencies
 
@@ -8,7 +8,7 @@ CommonMark.Editor is a basic web based editor for [CommonMark](http://commonmark
 * [Bootstrap](http://getbootstrap.com/) tested against [3.3.2](https://github.com/twbs/bootstrap/releases/tag/v3.3.2) - only dependent on the stylesheet.
 * [jQuery](http://jquery.com/) tested against [2.1.3](https://github.com/jquery/jquery/releases/tag/2.1.3)
 
-CommonMark.Editor should work against other versions of these libraries but has only been tested against the ones noted above.
+Bootstrap CommonMark Editor should work against other versions of these libraries but has only been tested against the ones noted above.
 
 ### Optional
 
@@ -16,11 +16,11 @@ CommonMark.Editor should work against other versions of these libraries but has 
 
 ## Building
 
-CommonMark.Editor uses [Grunt](http://gruntjs.com/) to minimise the javascript and compile the [LESS](http://lesscss.org/) file. Once you have Grunt installed you only need to run `grunt` from the CommonMark.Editor directory to build, this will create a directory called `dist` which will contain the files.
+Bootstrap CommonMark Editor uses [Grunt](http://gruntjs.com/) to minimise the javascript and compile the [LESS](http://lesscss.org/) file. Once you have Grunt installed you only need to run `grunt` from the CommonMark.Editor directory to build, this will create a directory called `dist` which will contain the files.
 
 ## Usage
 
-CommonMark.Editor is a jQuery plugin, the most basic use case for it is as follows
+Bootstrap CommonMark Editor is a jQuery plugin, the most basic use case for it is as follows
 
 ```html
 <html>
@@ -33,7 +33,7 @@ CommonMark.Editor is a jQuery plugin, the most basic use case for it is as follo
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 		<script src="dist/commonmark.editor-0.1.0.min.js"></script>
 
-		<title>CommonMark editor demo</title>
+		<title>Bootstrap CommonMark Editor demo</title>
 	</head>
 	<body>
 		<div class="container">
@@ -106,9 +106,9 @@ editor[0].on.inlineToggle(function() {
 
 ### Require.JS
 
-CommonMark.Editor will expose itself as an [AMD module](http://en.wikipedia.org/wiki/Asynchronous_module_definition) if it is possible, in such cases it will **not** load itself into the global scope so it does necessarily not play well in environments where there is a mixture of AMD modules and libraries loaded into the global scope.
+Bootstrap CommonMark Editor will expose itself as an [AMD module](http://en.wikipedia.org/wiki/Asynchronous_module_definition) if it is possible, in such cases it will **not** load itself into the global scope so it does necessarily not play well in environments where there is a mixture of AMD modules and libraries loaded into the global scope.
 
-The easiest way to way to setup CommonMark.Editor to work in as an AMD module is to add it to your require config in a similar way to the following:
+The easiest way to way to setup the editor to work in as an AMD module is to add it to your require config in a similar way to the following:
 
 ```js
 requirejs.config({
@@ -185,7 +185,7 @@ Like the main library the knockout bindings will expose as an AMD module if poss
 
 ### Issues
 
-If you find any issues while using CommonMark.Editor please feel free to report them at the [GitHub Repository](https://github.com/mlowen/CommonMark.Editor/issues).
+If you find any issues while using Bootstrap CommonMark Editor please feel free to report them at the [GitHub Repository](https://github.com/mlowen/CommonMark.Editor/issues).
 
 ### Contributing
 
@@ -193,7 +193,7 @@ If you want to contribute feel free to fork the [GitHub repository](https://gith
 
 ## License
 
-CommonMark.Editor is available under the MIT license which is as follows:
+Bootstrap CommonMark Editor is available under the MIT license which is as follows:
 
 Copyright &copy; 2014, 2015 Michael Lowen
 

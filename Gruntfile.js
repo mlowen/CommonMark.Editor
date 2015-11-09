@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 					sourceMap: true
 				},
 				files: {
-					'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'src/<%= pkg.name %>.js',
-					'dist/<%= pkg.name %>.knockout-<%= pkg.version %>.min.js': 'src/<%= pkg.name %>.knockout.js'
+					'dist/<%= pkg.name %>.js': 'src/<%= pkg.name %>.js',
+					'dist/<%= pkg.name %>-knockout.js': 'src/<%= pkg.name %>-knockout.js'
 				}
 			}
 		},
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 					optimization: 2
 				},
 				files: {
-					'dist/<%= pkg.name %>-<%= pkg.version %>.min.css': "src/<%= pkg.name %>.less"
+					'dist/<%= pkg.name %>.css': "src/<%= pkg.name %>.less"
 				}
 			}
 		},
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 					{ src: [ 'LICENSE', 'README.md' ] },
 					{
 						cwd: 'dist/',
-						src: [ '*-<%= pkg.version %>.*' ],
+						src: [ '*' ],
 						dest: 'commonmark.editor/',
 						expand: true,
 					}

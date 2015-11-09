@@ -1,0 +1,4 @@
+/*! bootstrap-commonmark-editor-0.4.0 2015-11-09 */
+
+!function(){var a=function(a,b){b.bindingHandlers.commonmarkEditor||(b.bindingHandlers.commonMarkEditor={init:function(b,c){var d="",e=c(),f="object"==typeof e?e:null,g=null;f&&(e=e.value,"function"==typeof f.inline&&(g=f.inline,f.inline=!0));var h=a(b).commonMarkEditor(f)[0];"function"==typeof e?(d=e(),h.on.change(function(a){e(a.text)}),e.subscribe(function(a){h.text(a)})):d=e,g&&(h.inline(g()),g.subscribe(function(a){h.inline(a)}),h.on.inlineToggle(function(){var a=h.inline();a!=g()&&g(a)})),h.text(d)}})};"function"==typeof define&&define.amd?define(["jquery","knockout","commonmark.editor"],a):a(jQuery,ko)}();
+//# sourceMappingURL=bootstrap-commonmark-editor-knockout.js.map

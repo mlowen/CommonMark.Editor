@@ -1,0 +1,33 @@
+{
+  "name": "bootstrap-commonmark-editor",
+  "description": "A basic web based CommonMark editor for bootstrap loosely inspired by the markdown editor available at GitHub.",
+  "main": "src/commonmark.editor.js",
+  "authors": [
+    "Mike Lowen <mike@mlowen.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "commonmark",
+    "bootstrap",
+    "editor"
+  ],
+  "homepage": "https://github.com/mlowen/CommonMark.Editor",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "demo",
+    "src"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "commonmark": "~0.22.0",
+    "jquery": "~2.1.4"
+  }
+}
