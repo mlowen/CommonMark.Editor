@@ -33,7 +33,6 @@ gulp.task 'build:release', [ 'build:scripts', 'build:styles' ], () ->
 	gulp.src([
 		'dist/bootstrap-commonmark-editor.js'
 		'dist/bootstrap-commonmark-editor.css'
-		'dist/bootstrap-commonmark-editor-knockout.js'
 		'README.md'
 		'LICENSE'
 	])
