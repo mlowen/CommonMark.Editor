@@ -3,6 +3,11 @@
   "version": "0.4.0",
   "license": "MIT",
   "description": "A basic web based CommonMark editor for bootstrap loosely inspired by the markdown editor available at GitHub.",
+  "author": {
+    "name": "Mike Lowen",
+    "email": "mike@mlowen.com",
+    "url": "http://mike.lowen.co.nz"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mlowen/CommonMark.Editor.git"

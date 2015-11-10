@@ -9,10 +9,13 @@ path = require 'path'
 
 pkg = require './package.json'
 
+banner = '/*! <%= pkg.name %> <%= pkg.version %> Copyright (c) 2014, 2015 <%= pkg.author.name %> */\n'
+
 gulp.task 'build:scripts', () ->
 	gulp.src('./src/*.js')
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
+		.pipe(header banner, { pkg: pkg })
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest './dist')
 
@@ -22,6 +25,7 @@ gulp.task 'build:styles', () ->
 		.pipe(less({
 			paths: [ path.join(__dirname, 'src') ]
 		}))
+		.pipe(header banner, { pkg: pkg })
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest './dist')
 
