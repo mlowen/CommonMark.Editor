@@ -3,6 +3,7 @@ header = require 'gulp-header'
 less = require 'gulp-less'
 sourcemaps = require 'gulp-sourcemaps'
 uglify = require 'gulp-uglify'
+zip = require 'gulp-zip'
 
 path = require 'path'
 
@@ -23,6 +24,17 @@ gulp.task 'build:styles', () ->
 		}))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest './dist')
+
+gulp.task 'build:release', [ 'build:scripts', 'build:styles' ], () ->
+	gulp.src([
+		'dist/bootstrap-commonmark-editor.js'
+		'dist/bootstrap-commonmark-editor.css'
+		'dist/bootstrap-commonmark-editor-knockout.js'
+		'README.md'
+		'LICENSE'
+	])
+	.pipe(zip(pkg.name + '-' + pkg.version + '.zip'))
+	.pipe(gulp.dest './')
 
 # Meta tasks
 
