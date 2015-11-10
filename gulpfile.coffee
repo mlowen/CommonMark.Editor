@@ -42,4 +42,8 @@ gulp.task 'build:release', [ 'build:scripts', 'build:styles' ], () ->
 
 # Meta tasks
 
+gulp.task 'watch', () ->
+	gulp.watch './src/*.js', [ 'build:scripts' ]
+	gulp.watch './src/*.less', [ 'build:styles' ]
+
 gulp.task 'default', [ 'build:scripts', 'build:styles' ]
