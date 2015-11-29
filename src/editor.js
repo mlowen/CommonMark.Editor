@@ -27,7 +27,7 @@ var Editor = function(element, options) {
 		if(text === value) return;
 
 		text = value;
-		content.text(text);
+		content.val(text);
 
 		if(inlineContent)
 			inlineContent.commonmark(text);

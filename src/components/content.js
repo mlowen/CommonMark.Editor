@@ -4,7 +4,7 @@ var Content = function(options) {
 	var events = { change: 'cm-editor-content-change' };
 
 	var textarea = $('<textarea class="form-control"></textarea>');
-	var preview = new Renderer('preview');// $('<div class="preview"></div>');
+	var preview = new Renderer('preview');
 
 	if(options.name)
 		textarea.attr('name', options.name);
@@ -31,16 +31,17 @@ var Content = function(options) {
 		}
 	};
 
-	self.text = function(text) {
-		if(typeof text === 'undefined') return textarea.val();
-
+	self.val = function(value) {
 		// Lets not cause unnecessary resetting of text and fire unneeded events.
-		if(textarea.val() === text)
-			return;
-
-		textarea.val(text);
-		textarea.change();
-	}
+		if(typeof value !== 'undefined' && textarea.val() !== value) {	
+			textarea.val(value);
+			textarea.change();
+		}
+		
+		return textarea.val();
+	};
+	
+	self.html = function() { return preview.html(); };
 
 	self.show = function() { self.element.show(); };
 	self.hide = function() { self.element.hide(); };
