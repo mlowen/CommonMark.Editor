@@ -20,19 +20,18 @@ var Editor = function(element, options) {
 	self.element = $(element);
 
 	// Methods
-	self.text = function(value) {
-		if(typeof value === 'undefined')
-			return text;
-
-		if(text === value) return;
-
-		text = value;
-		content.val(text);
-
-		if(inlineContent)
-			inlineContent.commonmark(text);
-
-		self.trigger.change({ text: text });
+	self.val = function(value) {
+		if(typeof value !== 'undefined' && text !== value) {
+			text = value;
+			content.val(text);
+	
+			if(inlineContent)
+				inlineContent.commonmark(text);
+	
+			self.trigger.change({ text: text });
+		}
+		
+		return text;
 	};
 
 	self.inline = function(value) {
@@ -76,13 +75,13 @@ var Editor = function(element, options) {
 			if(data.text === text) footer.disable();
 			else footer.enable();
 		} else {
-			self.text(data.text);
+			self.val(data.text);
 		}
 	});
 
 	if(options.save) {
-		footer.on.save(function() { self.text(content.text()); });
-		footer.on.revert(function() { content.text(self.text()); });
+		footer.on.save(function() { self.val(content.val()); });
+		footer.on.revert(function() { content.val(self.val()); });
 	}
 
 	if(options.inline) {
@@ -107,5 +106,5 @@ var Editor = function(element, options) {
 		.append(header.element)
 		.append(body);
 
-	self.text(options.text);
+	self.val(options.text);
 }
