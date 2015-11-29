@@ -5,18 +5,6 @@ var Editor = function(element, options) {
 
 	var events = { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' };
 
-	/* Utility functions */
-	var toggleInline = function() {
-		content.toggle();
-		inlineContent.toggle();
-		header.toggle();
-
-		if(options.save)
-			footer.toggle();
-
-		self.trigger.inlineToggle();
-	};
-
 	/* Public API */
 	self.element = $(element);
 
@@ -44,11 +32,18 @@ var Editor = function(element, options) {
 
 		var isInline = inlineContent.visible();
 
-		if(typeof value === 'undefined')
-			return isInline;
-
-		if(isInline != value)
-			toggleInline();
+		if(typeof value !== 'undefined' && isInline != value) {
+			content.toggle();
+			inlineContent.toggle();
+			header.toggle();
+	
+			if(options.save)
+				footer.toggle();
+	
+			self.trigger.inlineToggle();
+		}
+		
+		return inlineContent.visible();
 	};
 
 	// Events
@@ -94,7 +89,7 @@ var Editor = function(element, options) {
 		if(options.save)
 			footer.hide();
 
-		header.on.toggle(toggleInline);
+		header.on.toggle(function () { self.inline(!self.inline()); });
 	}
 
 	// Add all the elements
