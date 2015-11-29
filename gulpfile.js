@@ -13,13 +13,14 @@ var banner = '/*! <%= pkg.name %> <%= pkg.version %> Copyright (c) 2014, 2015 <%
 
 gulp.task('build:scripts', function() {
 	return gulp.src([
-			'./src/prefix.js',
-			'./src/header.js',
-			'./src/content.js',
-			'./src/footer.js',
+			'./src/fragments/prefix.js',
+			'./src/components/renderer.js',
+			'./src/components/header.js',
+			'./src/components/content.js',
+			'./src/components/footer.js',
 			'./src/editor.js',
 			'./src/binding.js',
-			'./src/suffix.js'
+			'./src/fragments/suffix.js'
 		])
 		.pipe(sourcemaps.init())
 		.pipe(concat('bootstrap-commonmark-editor.js'))

@@ -1,70 +1,72 @@
 var Editor = function(element, options) {
 	var self = this;
 	var text = '';
+	var html = '';
 
-	var events = { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' };
-
-	/* Utility functions */
-	var toggleInline = function() {
-		content.toggle();
-		inlineContent.toggle();
-		header.toggle();
-
-		if(options.save)
-			footer.toggle();
-
-		self.trigger.inlineToggle();
+	var events = {
+		on: function(type, callback) { self.element.on(type, callback); },
+		trigger: function(type, data) { self.element.trigger(new $.Event(type, data)); },
+		types: { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' }
 	};
 
 	/* Public API */
 	self.element = $(element);
 
 	// Methods
-	self.text = function(value) {
-		if(typeof value === 'undefined')
-			return text;
-
-		if(text === value) return;
-
-		text = value;
-		content.text(text);
-
-		if(inlineContent)
-			inlineContent.html(convert(text));
-
-		self.trigger.change({ text: text });
+	self.val = function(value) {
+		if(typeof value !== 'undefined' && text !== value) {
+			text = value;
+			content.val(text);
+			html = content.html();
+	
+			if(inlineContent)
+				inlineContent.commonmark(text);
+	
+			self.trigger.change({ text: text });
+		}
+		
+		return text;
 	};
+
+	self.html = function(value) { return html; };
 
 	self.inline = function(value) {
 		if(!options.inline)
 			return false;
 
-		var isInline = inlineContent.is(':visible');
+		var isInline = inlineContent.visible();
 
-		if(typeof value === 'undefined')
-			return isInline;
-
-		if(isInline != value)
-			toggleInline();
+		if(typeof value !== 'undefined' && isInline != value) {
+			content.toggle();
+			inlineContent.toggle();
+			header.toggle();
+	
+			if(options.save)
+				footer.toggle();
+	
+			self.trigger.inlineToggle();
+		}
+		
+		return inlineContent.visible();
 	};
 
 	// Events
 
 	self.on = {
-		change: function(callback) { self.element.on(events.change, callback); },
-		inlineToggle: function(callback) { self.element.on(events.inlineToggle, callback); }
+		change: function(callback) { events.on(events.types.change, callback); },
+		inlineToggle: function(callback) { events.on(events.types.inlineToggle, callback); }
 	};
 
 	self.trigger = {
-		change: function(data) { self.element.trigger(new $.Event(events.change, data)); },
-		inlineToggle: function() { self.element.trigger(new $.Event(events.inlineToggle)); }
+		change: function(data) { events.trigger(events.types.change, data); },
+		inlineToggle: function() { events.trigger(events.types.inlineToggle); }
 	};
 
 	/* Constructor */
 	var header = new Header(options);
 	var content = new Content(options);
 	var footer = options.save ? new Footer() : null;
-	var inlineContent = options.inline ? $('<div class="inline-content"></div>') : null;
+	var inlineContent = options.inline ? new Renderer('inline-content') : null;
 
 	// Subscribe to events
 
@@ -76,13 +78,13 @@ var Editor = function(element, options) {
 			if(data.text === text) footer.disable();
 			else footer.enable();
 		} else {
-			self.text(data.text);
+			self.val(data.text);
 		}
 	});
 
 	if(options.save) {
-		footer.on.save(function() { self.text(content.text()); });
-		footer.on.revert(function() { content.text(self.text()); });
+		footer.on.save(function() { self.val(content.val()); });
+		footer.on.revert(function() { content.val(self.val()); });
 	}
 
 	if(options.inline) {
@@ -91,7 +93,7 @@ var Editor = function(element, options) {
 		if(options.save)
 			footer.hide();
 
-		header.on.toggle(toggleInline);
+		header.on.toggle(function () { self.inline(!self.inline()); });
 	}
 
 	// Add all the elements
@@ -101,11 +103,11 @@ var Editor = function(element, options) {
 		body.append(footer.element);
 
 	if(inlineContent)
-		body.append(inlineContent);
+		body.append(inlineContent.element);
 
 	self.element.addClass('commonmark-editor')
 		.append(header.element)
 		.append(body);
 
-	self.text(options.text);
+	self.val(options.text);
 }
