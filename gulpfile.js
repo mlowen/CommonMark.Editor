@@ -14,6 +14,7 @@ var banner = '/*! <%= pkg.name %> <%= pkg.version %> Copyright (c) 2014, 2015 <%
 gulp.task('build:scripts', function() {
 	return gulp.src([
 			'./src/fragments/prefix.js',
+			'./src/components/renderer.js',
 			'./src/components/header.js',
 			'./src/components/content.js',
 			'./src/components/footer.js',

@@ -4,7 +4,7 @@ var Content = function(options) {
 	var events = { change: 'cm-editor-content-change' };
 
 	var textarea = $('<textarea class="form-control"></textarea>');
-	var preview = $('<div class="preview"></div>');
+	var preview = new Renderer('preview');// $('<div class="preview"></div>');
 
 	if(options.name)
 		textarea.attr('name', options.name);
@@ -13,7 +13,7 @@ var Content = function(options) {
 	self.states = { edit: 1, preview: 2 }
 	self.element = $('<div class="cm-editor-content"></div>')
 		.append(textarea)
-		.append(preview);
+		.append(preview.element);
 
 	// Methods
 	self.state = function(s) {
@@ -55,7 +55,7 @@ var Content = function(options) {
 	var onChange = function() {
 		var text = textarea.val();
 
-		preview.html(convert(text));
+		preview.commonmark(text);
 		self.trigger.change({ text: text });
 	};
 
