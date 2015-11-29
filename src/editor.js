@@ -1,6 +1,7 @@
 var Editor = function(element, options) {
 	var self = this;
 	var text = '';
+	var html = '';
 
 	var events = { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' };
 
@@ -24,6 +25,7 @@ var Editor = function(element, options) {
 		if(typeof value !== 'undefined' && text !== value) {
 			text = value;
 			content.val(text);
+			html = content.html();
 	
 			if(inlineContent)
 				inlineContent.commonmark(text);
@@ -33,6 +35,8 @@ var Editor = function(element, options) {
 		
 		return text;
 	};
+
+	self.html = function(value) { return html; };
 
 	self.inline = function(value) {
 		if(!options.inline)
