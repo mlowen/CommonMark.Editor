@@ -1,4 +1,4 @@
-var EditorContent = function(options) {
+var Content = function(options) {
 	var self = this;
 	var state = null;
 	var events = { change: 'cm-editor-content-change' };

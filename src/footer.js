@@ -1,4 +1,4 @@
-var EditorFooter = function() {
+var Footer = function() {
 	var self = this;
 	var property = 'disabled';
 	var revert = $('<button class="btn btn-default">Revert changes</button>');

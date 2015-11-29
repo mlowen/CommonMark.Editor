@@ -61,9 +61,9 @@ var Editor = function(element, options) {
 	};
 
 	/* Constructor */
-	var header = new EditorHeader(options);
-	var content = new EditorContent(options);
-	var footer = options.save ? new EditorFooter() : null;
+	var header = new Header(options);
+	var content = new Content(options);
+	var footer = options.save ? new Footer() : null;
 	var inlineContent = options.inline ? $('<div class="inline-content"></div>') : null;
 
 	// Subscribe to events

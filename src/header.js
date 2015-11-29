@@ -1,4 +1,4 @@
-var EditorHeader = function(options) {
+var Header = function(options) {
 	var self = this;
 	var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit', toggle: 'cm-editor-header-toggle' };
 	
