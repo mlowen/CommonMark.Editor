@@ -30,7 +30,7 @@ gulp.task 'build:scripts', () ->
 		.pipe(gulp.dest './dist')
 
 gulp.task 'build:styles', () ->
-	gulp.src('./src/*.less')
+	gulp.src('./src/styles/*.less')
 		.pipe(sourcemaps.init())
 		.pipe(less({
 			paths: [ path.join(__dirname, 'src') ]
