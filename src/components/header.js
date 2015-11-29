@@ -1,21 +1,33 @@
 var Header = function(options) {
 	var self = this;
-	var events = { preview: 'cm-editor-header-preview', edit: 'cm-editor-header-edit', toggle: 'cm-editor-header-toggle' };
+	var events = {
+		on: function(type, callback) {
+			self.element.on(type, callback);
+		},
+		trigger: function(type, data) {
+			self.element.trigger(new $.Event(type, data));
+		},
+		types: { 
+			preview: 'cm-editor-header-preview', 
+			edit: 'cm-editor-header-edit', 
+			toggle: 'cm-editor-header-toggle' 
+		}
+	};
 	
 	/* Public API */
 	self.element = $('<div class="cm-editor-header"></div>');
 	
 	// Events
 	self.on = {
-		preview: function(callback) { self.element.on(events.preview, callback); },
-		edit: function(callback) { self.element.on(events.edit, callback); },
-		toggle: function(callback) { self.element.on(events.toggle, callback); }
+		preview: function(callback) { events.on(events.types.preview, callback); },
+		edit: function(callback) { events.on(events.types.edit, callback); },
+		toggle: function(callback) { events.on(events.types.toggle, callback); }
 	};
 	
 	self.trigger = {
-		preview: function(data) { self.element.trigger(new $.Event(events.preview, data)); },
-		edit: function(data) { self.element.trigger(new $.Event(events.edit, data)); },
-		toggle: function(data) { self.element.trigger(new $.Event(events.toggle)); }
+		preview: function(data) { events.trigger(events.types.preview, data); },
+		edit: function(data) { events.trigger(events.types.edit, data); },
+		toggle: function(data) { events.trigger(events.types.toggle); }
 	};
 	
 	self.toggle = function() {

@@ -3,7 +3,11 @@ var Editor = function(element, options) {
 	var text = '';
 	var html = '';
 
-	var events = { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' };
+	var events = {
+		on: function(type, callback) { self.element.on(type, callback); },
+		trigger: function(type, data) { self.element.trigger(new $.Event(type, data)); },
+		types: { change: 'cm-editor-changed', inlineToggle: 'cm-editor-inline-toggle' }
+	};
 
 	/* Public API */
 	self.element = $(element);
@@ -49,13 +53,13 @@ var Editor = function(element, options) {
 	// Events
 
 	self.on = {
-		change: function(callback) { self.element.on(events.change, callback); },
-		inlineToggle: function(callback) { self.element.on(events.inlineToggle, callback); }
+		change: function(callback) { events.on(events.types.change, callback); },
+		inlineToggle: function(callback) { events.on(events.types.inlineToggle, callback); }
 	};
 
 	self.trigger = {
-		change: function(data) { self.element.trigger(new $.Event(events.change, data)); },
-		inlineToggle: function() { self.element.trigger(new $.Event(events.inlineToggle)); }
+		change: function(data) { events.trigger(events.types.change, data); },
+		inlineToggle: function() { events.trigger(events.types.inlineToggle); }
 	};
 
 	/* Constructor */
