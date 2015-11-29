@@ -75,8 +75,9 @@ The plugin method returns an array of editor objects one for each element return
 * **element** - The jQuery object which the plugin was called on.
 * **inline()** - Will return a boolean, `true` if the editor is in "inline" mode and `false` if in "edit" mode. If `inline` was not enabled via the options when creating the editor it will always return `false`.
 * **inline(*boolean*)** - Will set if the editor is in "inline" or "edit" mode, this method will only work when the `inline` flag is set to true when creating the editor, otherwise it does nothing.
-* **text()** - Will return you the current text of the editor.
-* **text(*string*)** - Sets the current text of the editor.
+* **val()** - Will return you the current text of the editor.
+* **val(*string*)** - Sets the current text of the editor.
+* **html()** - Returns the current text of the editor transformed into HTML.
 
 #### Events
 
