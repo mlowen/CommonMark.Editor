@@ -30,7 +30,7 @@ var Editor = function(element, options) {
 		content.text(text);
 
 		if(inlineContent)
-			inlineContent.html(convert(text));
+			inlineContent.commonmark(text);
 
 		self.trigger.change({ text: text });
 	};
@@ -39,7 +39,7 @@ var Editor = function(element, options) {
 		if(!options.inline)
 			return false;
 
-		var isInline = inlineContent.is(':visible');
+		var isInline = inlineContent.visible();
 
 		if(typeof value === 'undefined')
 			return isInline;
@@ -64,7 +64,7 @@ var Editor = function(element, options) {
 	var header = new Header(options);
 	var content = new Content(options);
 	var footer = options.save ? new Footer() : null;
-	var inlineContent = options.inline ? $('<div class="inline-content"></div>') : null;
+	var inlineContent = options.inline ? new Renderer('inline-content') : null;
 
 	// Subscribe to events
 
@@ -101,7 +101,7 @@ var Editor = function(element, options) {
 		body.append(footer.element);
 
 	if(inlineContent)
-		body.append(inlineContent);
+		body.append(inlineContent.element);
 
 	self.element.addClass('commonmark-editor')
 		.append(header.element)
